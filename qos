@@ -1,0 +1,10 @@
+nasm -f bin -o boot.bin boot.asm
+dd bs=512 count=6 status=noxfer conv=notrunc if=boot.bin of=kernel.flp
+rm boot.bin
+
+rm kernel.out
+gcc -mno-red-zone -Wall -m32 -ffreestanding -nostdlib -fno-builtin *.c -o kernel.out
+dd bs=512 seek=6 conv=notrunc if=kernel.out of=kernel.flp
+#rm kernel.out
+
+qemu-system-i386 -s $1 -fda ./kernel.flp
