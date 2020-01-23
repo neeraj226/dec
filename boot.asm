@@ -2,6 +2,7 @@
 # Bios will load the first 512 bytes of generated binary code of this file.
 # This file contains code of first and second stage bootloader.
 # a
+# b
 
 BITS 16
 org 0x7c00
